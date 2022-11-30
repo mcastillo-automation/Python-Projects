@@ -22,8 +22,14 @@ class Scoreboard(Turtle):
         self.write(f"Score: {self.current_score} High Score: {self.high_score}", align=ALIGNMENT, font=FONT)
 
     def read_high_score(self):
-        with open(DATA) as file:
-            return int(file.read())
+        try:
+            with open(DATA) as file:
+                return int(file.read())
+        except IOError:
+            with open(DATA, mode='w') as file:
+                file.write("0")
+            with open(DATA) as file:
+                return int(file.read())
 
     def write_high_score(self):
         with open(DATA, mode='w') as file:
