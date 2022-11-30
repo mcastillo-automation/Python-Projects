@@ -37,7 +37,7 @@ class Snake:
         segment.pu()
         segment.setpos(position)
 
-    def reset(self):
+    def reset_game(self):
         for seg in self.segment_list:
             seg.goto(1000, 1000)
         self.segment_list.clear()
