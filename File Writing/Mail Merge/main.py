@@ -13,4 +13,4 @@ with open('./Input/Letters/starting_letter.txt', mode='r') as file:
 # Iterate through names list and use re.sub() to replace [names] with list values.
 for items in names:
     with open(f'./Output/ReadyToSend/{items}.txt', mode='w+') as text:
-        text.write(re.sub(pattern, items, template))
+        text.write(re.sub(pattern, repl=items, string=template))
