@@ -49,9 +49,9 @@ def save_entry():
                 file.write(f"{website_entry} | {email_entry} | {password_entry}\n")
             messagebox.showinfo(message="Password Saved")
 
-        website_field.delete(0, 'end')
-        email_field.delete(0, 'end')
-        password_field.delete(0, 'end')
+        website_field.delete(first=0, last='end')
+        email_field.delete(first=0, last='end')
+        password_field.delete(first=0, last='end')
         website_field.focus()
 
 
