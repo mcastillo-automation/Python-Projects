@@ -1,8 +1,26 @@
-from tkinter import *
+import random
+import string
+from tkinter import Tk
+from tkinter import Button
+from tkinter import Canvas
+from tkinter import Entry
+from tkinter import Label
+from tkinter import PhotoImage
 from tkinter import messagebox
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+
+def random_password_generator():
+    accepted_symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+    password = ''.join(random.choices(string.ascii_letters + string.digits +
+                                      ''.join(accepted_symbols), k=17))
+    if password_field.get().strip() == '':
+        password_field.insert(index=0, string=password)
+    else:
+        password_field.delete(first=0, last='end')
+        password_field.insert(index=0, string=password)
+
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
@@ -16,7 +34,8 @@ def save_entry():
 
     else:
         confirmation = messagebox.askokcancel(
-            message=f"Is the below info accurate?\nEmail: {email_entry}\nPassword: {password_entry}",
+            message=(f"Is the below info accurate?\n"
+                     f"Email: {email_entry}\nPassword: {password_entry}"),
             icon='question',
             title="Confirmation"
         )
@@ -55,7 +74,7 @@ email_field = Entry(width=35)
 password_field = Entry(width=21)
 
 # Buttons
-generate_button = Button(text="Generate Password")
+generate_button = Button(text="Generate Password", command=random_password_generator)
 add_button = Button(text="Add", width=36, command=save_entry)
 
 # Grids
