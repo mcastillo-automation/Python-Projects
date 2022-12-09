@@ -7,6 +7,7 @@ from tkinter import Entry
 from tkinter import Label
 from tkinter import PhotoImage
 from tkinter import messagebox
+import pyperclip
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -15,11 +16,15 @@ def random_password_generator():
     accepted_symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
     password = ''.join(random.choices(string.ascii_letters + string.digits +
                                       ''.join(accepted_symbols), k=17))
+
     if password_field.get().strip() == '':
         password_field.insert(index=0, string=password)
+        pyperclip.copy(password)
+
     else:
         password_field.delete(first=0, last='end')
         password_field.insert(index=0, string=password)
+        pyperclip.copy(password)
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
