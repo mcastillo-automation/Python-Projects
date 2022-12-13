@@ -1,5 +1,6 @@
 import random
 import string
+import json
 from tkinter import Tk
 from tkinter import Button
 from tkinter import Canvas
@@ -33,26 +34,54 @@ def save_entry():
     website_entry = website_field.get().strip()
     email_entry = email_field.get().strip()
     password_entry = password_field.get().strip()
-
+    new_data = {
+        website_entry: {
+            "email": email_entry,
+            "password": password_entry,
+        }
+    }
     if website_entry == "" or email_entry == "" or password_entry == "":
         messagebox.showerror(message="Please don't leave any fields empty!")
 
     else:
-        confirmation = messagebox.askokcancel(
-            message=(f"Is the below info accurate?\n"
-                     f"Email: {email_entry}\nPassword: {password_entry}"),
-            icon='question',
-            title="Confirmation"
-        )
-        if confirmation is True:
-            with open("data.txt", mode='a') as file:
-                file.write(f"{website_entry} | {email_entry} | {password_entry}\n")
+        try:
+            with open("data.json", mode='r') as file:
+                data = json.load(file)
+                data.update(new_data)
+        except FileNotFoundError:
+            with open("data.json", mode='w') as file:
+                json.dump(new_data, file, indent=4)
+        else:
+            with open("data.json", mode='w') as file:
+                json.dump(data, file, indent=4)
+        finally:
             messagebox.showinfo(message="Password Saved")
+            website_field.delete(first=0, last='end')
+            email_field.delete(first=0, last='end')
+            password_field.delete(first=0, last='end')
+            website_field.focus()
 
-        website_field.delete(first=0, last='end')
-        email_field.delete(first=0, last='end')
-        password_field.delete(first=0, last='end')
-        website_field.focus()
+
+# ---------------------------- SEARCH --------------------------------- #
+
+def search():
+    website_entry = website_field.get().strip()
+
+    if website_entry == "":
+        messagebox.showerror(message="Unable to search without website!")
+
+    else:
+        try:
+            with open("data.json", mode='r') as file:
+                text = json.load(file)
+        except FileNotFoundError:
+            messagebox.showerror(title="Error", message="No Data File Found.")
+        else:
+            try:
+                messagebox.showinfo(
+                    message=f"Email: {text[website_entry]['email']}\nPassword: {text[website_entry]['password']}")
+            except KeyError as error_message:
+                messagebox.showerror(message=f"No details for {error_message} exist.")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -81,10 +110,12 @@ password_field = Entry(width=21)
 # Buttons
 generate_button = Button(text="Generate Password", command=random_password_generator)
 add_button = Button(text="Add", width=36, command=save_entry)
+search_button = Button(text="Search", command=search)
 
 # Grids
 website_label.grid(row=1, column=0, sticky="e")
 website_field.grid(row=1, column=1, columnspan=2, sticky="we")
+search_button.grid(row=1, column=2, sticky="e")
 email_label.grid(row=2, column=0, sticky="e")
 email_field.grid(row=2, column=1, columnspan=2, sticky="we")
 password_label.grid(row=3, column=0, sticky="e")
