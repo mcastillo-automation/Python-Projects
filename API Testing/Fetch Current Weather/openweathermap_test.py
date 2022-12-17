@@ -17,6 +17,8 @@ lat={lat}&lon={lon}&appid={API_KEY}&units=imperial""",
     timeout=5,
 )
 
+response_weather.raise_for_status()
+
 weather_json = response_weather.json()
 
 weather_condition = weather_json["weather"][0]["main"].lower()
@@ -28,13 +30,9 @@ temp_min = weather_json["main"]["temp_min"]
 
 print(
     f"Today's weather will be {weather_condition} with a\
- {sky_condition}."
-)
-print(
-    f"""Current temperature is {current_temp} degrees farenheit\
- but it feels like {feels_like} farenheit."""
-)
-print(
-    f"""Today's max is {temp_max} farenheit\
- with a min of {temp_min} farenheit."""
+ {sky_condition}.\n"
+    f"Current temperature is {current_temp} degrees fahrenheit\
+ but it feels like {feels_like} fahrenheit.\n"
+    f"Today's max is {temp_max} fahrenheit\
+ with a min of {temp_min} fahrenheit."
 )
