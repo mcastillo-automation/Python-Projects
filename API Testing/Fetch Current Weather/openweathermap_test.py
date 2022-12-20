@@ -4,8 +4,9 @@ Uses geocoder and the openweathermap api to accomplish this.
 """
 from geocoder import ip
 import requests
+import config
 
-API_KEY = "05998eec56f11cca2b2803c05b4cfe96"
+API_KEY = config.API_KEY
 ENDPOINT = "https://api.openweathermap.org/data/2.5/weather"
 
 g = ip("me")
