@@ -6,16 +6,20 @@ from geocoder import ip
 import requests
 
 API_KEY = "05998eec56f11cca2b2803c05b4cfe96"
+ENDPOINT = "https://api.openweathermap.org/data/2.5/weather"
 
 g = ip("me")
 lat = g.lat
 lon = g.lng
 
-response_weather = requests.get(
-    f"""https://api.openweathermap.org/data/2.5/weather?\
-lat={lat}&lon={lon}&appid={API_KEY}&units=imperial""",
-    timeout=5,
-)
+weather_params = {
+    'lat': lat,
+    'lon': lon,
+    'appid': API_KEY,
+    'units': 'imperial'
+}
+
+response_weather = requests.get(ENDPOINT, params=weather_params, timeout=5)
 
 response_weather.raise_for_status()
 
