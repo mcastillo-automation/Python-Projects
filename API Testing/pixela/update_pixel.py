@@ -10,7 +10,7 @@ import config
 
 ENDPOINT = 'https://pixe.la/v1/users'
 current_day = datetime.date.today().strftime('%Y%m%d')
-graph_endpoint = f'{ENDPOINT}/{config.USERNAME}/graphs/{config.GRAPH_ID}/{current_day}'
+pixel_endpoint = f'{ENDPOINT}/{config.USERNAME}/graphs/{config.GRAPH_ID}/{current_day}'
 
 
 headers = {
