@@ -1,10 +1,13 @@
-import requests
+"""
+Messing around with the Pixela api. Available here: https://pixe.la/
+This allows a user to add a dot to their pixela graph.
+"""
+
 import datetime
+import requests
 import config
 
 
-'''Messing around with the Pixela api. Available here: https://pixe.la/ This allows a user to add a dot to their 
-pixela graph. '''
 
 ENDPOINT = 'https://pixe.la/v1/users'
 graph_endpoint = f'{ENDPOINT}/{config.USERNAME}/graphs/{config.GRAPH_ID}'
