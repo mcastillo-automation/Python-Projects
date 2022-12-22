@@ -20,5 +20,5 @@ request_body = {
     'quantity': '5'
 }
 
-response = requests.put(url=graph_endpoint, headers=headers, json=request_body)
+response = requests.put(url=pixel_endpoint, headers=headers, json=request_body)
 print(response.text)
