@@ -7,12 +7,9 @@ import datetime
 import requests
 import config
 
-
-
 ENDPOINT = 'https://pixe.la/v1/users'
 graph_endpoint = f'{ENDPOINT}/{config.USERNAME}/graphs/{config.GRAPH_ID}'
 current_day = datetime.date.today().strftime('%Y%m%d')
-
 
 headers = {
     'X-USER-TOKEN': config.TOKEN
