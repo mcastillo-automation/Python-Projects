@@ -12,14 +12,14 @@ class DataManager:
     def __init__(self):
         self.sheet_data = {}
 
-    def get_destination_date(self):
+    def get_destination_data(self):
         get_response = requests.get(url=fmtd_endpoint, headers=headers)
         get_response.raise_for_status()
         response_json = get_response.json()
         self.sheet_data = response_json['prices']
         return self.sheet_data
 
-    def put_destination_data(self):
+    def update_destination_codes(self):
         for city in self.sheet_data:
             data = {
                 'price': {
