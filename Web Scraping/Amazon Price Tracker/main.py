@@ -27,5 +27,5 @@ if product_price <= SALE_PRICE:
         connection.sendmail(
             from_addr=config.email,
             to_addrs=config.email,
-            msg=f"Subject:Amazon Price Alert\n\n{product_title} is now {product_price}.\n{product_link}",
+            msg=f"Subject:Amazon Price Alert\n\n{product_title} is now ${product_price}.\n{product_link}",
         )
