@@ -10,9 +10,9 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = config.key
 Bootstrap5(app)
 
-coffee_rating = ["☕️", "☕️"*2, "☕️"*3, "☕️"*4, "☕️"*5]
-wifi_rating = ["💪", "💪"*2, "💪"*3, "💪"*4, "💪"*5]
-power_rating = ["🔌", "🔌"*2, "🔌"*3, "🔌"*4, "🔌"*5]
+coffee_rating = ["☕️", "☕️" * 2, "☕️" * 3, "☕️" * 4, "☕️" * 5]
+wifi_rating = ["💪", "💪" * 2, "💪" * 3, "💪" * 4, "💪" * 5]
+power_rating = ["🔌", "🔌" * 2, "🔌" * 3, "🔌" * 4, "🔌" * 5]
 
 
 class CafeForm(FlaskForm):
@@ -25,6 +25,7 @@ class CafeForm(FlaskForm):
     power_outlet = SelectField("Power Socket Available", choices=power_rating, validators=[DataRequired()])
     submit = SubmitField("Submit")
 
+
 # all Flask routes below
 @app.route("/")
 def home():
@@ -36,7 +37,8 @@ def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
         print("True")
-        data = [form.cafe.data, form.location_url.data, form.open_time.data, form.close_time.data, form.coffee_rating.data, form. wifi_rating.data, form.power_outlet.data]
+        data = [form.cafe.data, form.location_url.data, form.open_time.data, form.close_time.data,
+                form.coffee_rating.data, form.wifi_rating.data, form.power_outlet.data]
         with open(file="cafe-data.csv", newline="", mode="a+") as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow(data)
